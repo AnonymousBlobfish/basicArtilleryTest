@@ -1,0 +1,14 @@
+config:
+  target: 'http://54.215.119.119:3004'
+  processor: "./my-functions.js"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+scenarios:
+  - name: "load restaurant page"
+    flow:
+      - function: "generateRandomData"
+      - loop:
+        - get:
+            url: "/api/restaurants/{{randomId}}/recommendations"
+        count: 100
